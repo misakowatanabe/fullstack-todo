@@ -1,0 +1,175 @@
+a:-webkit-any-link {
+  text-decoration: none;
+  color: #242424;
+}
+
+/* Create and update start */
+
+.title {
+  margin: 0px 0px 5px 5px;
+}
+
+.body {
+  margin: 20px 0px 5px 5px;
+}
+
+.textfield-title {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+.textfield-body {
+  background-color: #ffffff;
+  margin: 0px 0px 30px 0px;
+  width: 100%;
+}
+
+.error-message {
+  color: #b11b1b;
+  margin-left: 20px;
+}
+
+/* Create and update end */
+
+/* paper start */
+
+.preview-edit-delete-button {
+  color: #838383 !important;
+  min-width: 0px !important;
+  padding: 5px !important;
+  border-radius: 19px !important;
+  transition: 250ms !important;
+  position: absolute !important;
+}
+
+.todo-title {
+  font-size: 20px;
+  color: #313131;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 212px;
+}
+
+.todo-body {
+  font-size: 16px;
+  color: #868686;
+  white-space: pre-wrap;
+  padding-top: 18px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.todo-createdAt {
+  font-size: 16px;
+  color: #868686;
+  margin: 150px 0px 0px 0px;
+  overflow: hidden;
+  display: -webkit-box;
+  position: absolute;
+}
+
+.todo-updatedAt {
+  font-size: 16px;
+  color: #5da708;
+  margin: 150px 0px 0px 166px;
+  overflow: hidden;
+  display: -webkit-box;
+  position: absolute;
+}
+
+/* paper end */
+
+/* dialog start */
+
+.created-dialog {
+  margin-top: 20px;
+}
+
+.updated-dialog {
+  color: #5da708;
+  margin-left: 20px;
+}
+
+.title-dialog {
+  white-space: pre-wrap;
+}
+
+.body-dialog {
+  white-space: pre-wrap;
+}
+
+/* dialog end */
+
+/* delete alert start */
+.delete-button {
+  color: #c40303 !important;
+}
+
+.delete-cancel-button {
+  color: #6e6e6e !important;
+}
+
+/* Login start */
+
+.Login {
+  padding: 50px 0;
+}
+
+.login-title {
+  font-size: 30px;
+  color: #383838;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.Login form {
+  margin: 0 auto;
+  max-width: 320px;
+}
+
+.login-button {
+  margin-top: 30px;
+}
+
+/* Login end */
+
+/* Sign up start */
+
+.register-error-message {
+  margin-bottom: 20px;
+  color: #b11b1b;
+}
+
+/* Sign up end */
+
+/* Reusable components start */
+
+.toggle-signin-signup {
+  color: #4b4b4b;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.toggle-signin-signup:hover {
+  text-decoration: underline;
+}
+
+.password-toggle-button {
+  color: #6e6e6e;
+}
+
+.password-toggle-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.password-text-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 5px 5px 5px;
+}
+
+/* Reusable components end */
