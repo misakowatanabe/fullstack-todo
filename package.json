@@ -1,8 +1,8 @@
 {
-  "name": "succulent-storage",
+  "name": "fullstack-todo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +16,8 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.11.1",
     "socket.io": "^4.2.0"
+  },
+  "engines": {
+    "node": "14.17.6"
   }
 }
