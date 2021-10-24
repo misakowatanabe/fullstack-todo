@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import Button from "@material-ui/core/Button";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
 
 export default function DeleteTodo({ todoId, setOpen }) {
   const handleClose = () => {
@@ -16,6 +16,7 @@ export default function DeleteTodo({ todoId, setOpen }) {
         headers: {
           "Content-Type": "application/json",
         },
+        mode: "cors",
       });
       console.log("Success");
     } catch (error) {

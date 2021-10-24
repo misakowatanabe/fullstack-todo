@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
 import Button1 from "../components/Button1";
 import TextField from "@mui/material/TextField";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
 
 export default function UpdateTodo() {
   var { todoId } = useParams();
@@ -58,6 +58,7 @@ export default function UpdateTodo() {
           headers: {
             "Content-Type": "application/json",
           },
+          mode: "cors",
         });
       } catch (error) {
         console.log(error);

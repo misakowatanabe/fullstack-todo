@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { nanoid } from "nanoid";
 import Button1 from "../components/Button1";
 import TextField from "@mui/material/TextField";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
 
 export default function CreateTodo() {
   const [titleLetters, setTitleLetters] = useState("");
@@ -44,6 +44,7 @@ export default function CreateTodo() {
           headers: {
             "Content-Type": "application/json",
           },
+          mode: "cors",
         });
         console.log("Success");
         setTitleLetters("");

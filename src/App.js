@@ -19,7 +19,7 @@ import Profile from "./profile/Profile";
 import CreateTodo from "./create/CreateTodo";
 import UpdateTodo from "./update/UpdateTodo";
 import NotFound from "./notFound/NotFound";
-const ENDPOINT = "http://localhost:3001";
+const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
 
 export default function App() {
   initializeApp(firebaseConfig);
@@ -56,6 +56,7 @@ export default function App() {
             headers: {
               "Content-Type": "application/json",
             },
+            mode: "cors",
           }).then((res) => {
             res.json().then((data) => {
               console.log(data);
