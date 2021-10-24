@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/fullstack-todo/static/css/main.7e4a1296.chunk.css",
+    "main.js": "/fullstack-todo/static/js/main.374ec027.chunk.js",
+    "main.js.map": "/fullstack-todo/static/js/main.374ec027.chunk.js.map",
+    "runtime-main.js": "/fullstack-todo/static/js/runtime-main.9c1dfa7f.js",
+    "runtime-main.js.map": "/fullstack-todo/static/js/runtime-main.9c1dfa7f.js.map",
+    "static/js/2.b861cad2.chunk.js": "/fullstack-todo/static/js/2.b861cad2.chunk.js",
+    "static/js/2.b861cad2.chunk.js.map": "/fullstack-todo/static/js/2.b861cad2.chunk.js.map",
+    "index.html": "/fullstack-todo/index.html",
+    "static/css/main.7e4a1296.chunk.css.map": "/fullstack-todo/static/css/main.7e4a1296.chunk.css.map",
+    "static/js/2.b861cad2.chunk.js.LICENSE.txt": "/fullstack-todo/static/js/2.b861cad2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9c1dfa7f.js",
+    "static/js/2.b861cad2.chunk.js",
+    "static/css/main.7e4a1296.chunk.css",
+    "static/js/main.374ec027.chunk.js"
+  ]
+}
