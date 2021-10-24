@@ -29,7 +29,7 @@ app.use(
 );
 
 var admin = require("firebase-admin");
-const serviceAccount = require("/app/APIkey/succulent-bfbf4-firebase-adminsdk-f8i79-c3a8d470e1.json");
+const serviceAccount = require("./APIkey/succulent-bfbf4-firebase-adminsdk-f8i79-c3a8d470e1.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://succulent-bfbf4.firebaseio.com",
