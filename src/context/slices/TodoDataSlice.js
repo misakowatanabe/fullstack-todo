@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const todoDataSlice = createSlice({
   name: "todoData",
   initialState: {
-    value: [],
+    value: [{ title: "", body: "" }],
   },
   reducers: {
     updateTodoData: (state, action) => {

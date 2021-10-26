@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import Button from "@material-ui/core/Button";
-const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
+import { ENDPOINT } from "../config";
 
 export default function DeleteTodo({ todoId, setOpen }) {
   const handleClose = () => {

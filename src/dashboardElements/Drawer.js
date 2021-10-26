@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
+import { selectUserAuthData } from "../context/slices/UserAuthDataSlice";
 import Signout from "./Signout";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -16,9 +18,22 @@ import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";
 import Skeleton from "@mui/material/Skeleton";
 
-export default function Common() {
+export default function CommonDrawer() {
   const profileData = useSelector(selectProfileData);
   const isLoadingData = useSelector(selectIsLoadingData);
+  const userAuthData = useSelector(selectUserAuthData);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    const getName = async () => {
+      if (profileData) {
+        setFirstName(profileData.firstName);
+        setLastName(profileData.lastName);
+      }
+    };
+    getName();
+  }, [profileData]);
 
   const drawerWidth = 240;
 
@@ -45,12 +60,11 @@ export default function Common() {
             }}
           >
             <div>
-              {isLoadingData ? (
+              {isLoadingData ||
+              (userAuthData && firstName === "") ? (
                 <Skeleton variant="circular" width={100} height={100} />
               ) : (
-                <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}>
-                  M
-                </Avatar>
+                <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}></Avatar>
               )}
             </div>
           </ListItem>
@@ -62,7 +76,8 @@ export default function Common() {
           >
             <ListItemText
               primary={
-                isLoadingData ? (
+                isLoadingData ||
+                (userAuthData && firstName === "") ? (
                   <Skeleton
                     variant="text"
                     height={20}
@@ -73,7 +88,7 @@ export default function Common() {
                     }}
                   />
                 ) : (
-                  `${profileData.firstName} ${profileData.lastName}`
+                  `${firstName} ${lastName}`
                 )
               }
             />
@@ -97,7 +112,11 @@ export default function Common() {
               <ListItemText primary="Profile" />
             </ListItem>
           </NavLink>
-          <Signout />
+          <Signout
+          // setFirstName={setFirstName}
+          // setLastName={setLastName}
+          // firstName={firstName}
+          />
         </List>
       </Box>
     </Drawer>

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateTodoData } from "../context/slices/TodoDataSlice";
+import { updateProfileData } from "../context/slices/ProfileDataSlice";
 import { getAuth, signOut } from "firebase/auth";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -20,10 +22,10 @@ export default function Signout() {
   };
 
   const auth = getAuth();
-  let history = useHistory();
+  const dispatch = useDispatch();
   const handleClose = async () => {
-    setOpen(false);
-    history.push("/signin");
+    dispatch(updateTodoData([{ title: "", body: "" }]));
+    dispatch(updateProfileData([{ firstName: "", lastName: "" }]));
     await signOut(auth)
       .then(() => {
         // Sign-out successful.

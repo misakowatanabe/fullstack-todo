@@ -19,7 +19,7 @@ import Profile from "./profile/Profile";
 import CreateTodo from "./create/CreateTodo";
 import UpdateTodo from "./update/UpdateTodo";
 import NotFound from "./notFound/NotFound";
-const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
+import { ENDPOINT } from "./config";
 
 export default function App() {
   initializeApp(firebaseConfig);

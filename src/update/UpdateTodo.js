@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
 import Button1 from "../components/Button1";
 import TextField from "@mui/material/TextField";
-const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
+import { ENDPOINT } from "../config";
 
 export default function UpdateTodo() {
   var { todoId } = useParams();

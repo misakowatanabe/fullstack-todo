@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
@@ -36,7 +36,6 @@ export default function Login() {
   const [responseData, setResponseData] = useState(null);
   const auth = getAuth();
   const db = getFirestore();
-  let history = useHistory();
   function handleSubmit(e) {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -63,9 +62,6 @@ export default function Login() {
           } catch (e) {
             console.error("Error adding document: ", e);
           }
-        })
-        .then(() => {
-          history.push("/dashboard");
         })
         .catch((error) => {
           const errorCode = error.code;

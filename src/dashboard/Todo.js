@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 export default function Todo() {
   const data = useSelector(selectTodoData);
 
-  // if (data)
     return (
       <div
         style={{

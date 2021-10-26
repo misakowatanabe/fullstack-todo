@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../style/App.css";
-import { useHistory, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import PasswordToggleButton from "../components/PasswordToggleButton";
 import Button1 from "../components/Button1";
@@ -18,7 +18,6 @@ export default function Signin() {
 
   const [responseData, setResponseData] = useState(null);
   const auth = getAuth();
-  let history = useHistory();
   async function handleSubmit(e) {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -26,9 +25,6 @@ export default function Signin() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-      })
-      .then(() => {
-        history.push("/dashboard");
       })
       .catch((error) => {
         setResponseData(error.message);
