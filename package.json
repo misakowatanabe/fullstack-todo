@@ -34,7 +34,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "https://fullstack-todo-backend-misako.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../style/App.css";
 import { NavLink } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import PasswordToggleButton from "../components/PasswordToggleButton";
