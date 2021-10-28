@@ -145,6 +145,14 @@ a:-webkit-any-link {
 
 /* Sign up end */
 
+/* Sign out start */
+
+.signout-button {
+  color: #c40303 !important;
+}
+
+/* Sign out end */
+
 /* Reusable components start */
 
 .toggle-signin-signup {

@@ -21,9 +21,13 @@ export default function Signout() {
     setOpen(true);
   };
 
+  const handleCancel = () => {
+    setOpen(false);
+  };
+
   const auth = getAuth();
   const dispatch = useDispatch();
-  const handleClose = async () => {
+  const handleSignOut = async () => {
     dispatch(updateTodoData([{ title: "", body: "" }]));
     dispatch(updateProfileData([{ firstName: "", lastName: "" }]));
     await signOut(auth)
@@ -47,23 +51,24 @@ export default function Signout() {
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>
-        <ListItemText primary="Logout" />
+        <ListItemText primary="Sign out" />
       </ListItem>
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={handleCancel}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm logout"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Confirm sign out"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you logout?
+            Are you sure you sign out?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Logout
+          <Button onClick={handleCancel}>Cancel</Button>
+          <Button onClick={handleSignOut} autoFocus className="signout-button">
+            Sign out
           </Button>
         </DialogActions>
       </Dialog>
