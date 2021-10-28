@@ -1,51 +1,55 @@
-import { useSelector } from "react-redux";
-import { selectProfileData } from "../context/slices/ProfileDataSlice";
+import { getAuth } from "firebase/auth";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 
 export default function Profile() {
-  const profileData = useSelector(selectProfileData);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  var displayName = null;
+  var email = null;
+  if (user !== null) {
+    displayName = user.displayName;
+    email = user.email;
+  }
 
-  if (profileData)
-    return (
-      <div>
-        <Paper
+  return (
+    <div>
+      <Paper
+        style={{
+          padding: "40px 40px",
+          height: "auto",
+          position: "relative",
+        }}
+      >
+        <div
           style={{
-            padding: "40px 40px",
-            height: "auto",
-            position: "relative",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "flex-start",
+            alignItems: "center",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            <div>
-              <Avatar
-                sx={{
-                  width: 200,
-                  height: 200,
-                }}
-              >
-                <PersonIcon style={{ fontSize: "140px" }} />
-              </Avatar>
-              <div style={{ textAlign: "center", marginTop: "20px" }}>
-                Upload picture
-              </div>
-            </div>
-            <div style={{ marginLeft: "40px" }}>
-              <div>First Name: {profileData.firstName}</div>
-              <div>Last Name: {profileData.lastName}</div>
-              <div>Email: {profileData.email}</div>
-              <div>Edit</div>
+          <div>
+            <Avatar
+              sx={{
+                width: 200,
+                height: 200,
+              }}
+            >
+              <PersonIcon style={{ fontSize: "140px" }} />
+            </Avatar>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              Upload picture
             </div>
           </div>
-        </Paper>
-      </div>
-    );
+          <div style={{ marginLeft: "40px" }}>
+            <div>Name: {displayName}</div>
+            <div>Email: {email}</div>
+            <div>Edit</div>
+          </div>
+        </div>
+      </Paper>
+    </div>
+  );
 }

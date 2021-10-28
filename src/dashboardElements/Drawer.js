@@ -1,9 +1,5 @@
-import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectProfileData } from "../context/slices/ProfileDataSlice";
-import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
-import { selectUserAuthData } from "../context/slices/UserAuthDataSlice";
+import { getAuth } from "firebase/auth";
 import Signout from "./Signout";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -19,24 +15,15 @@ import Avatar from "@mui/material/Avatar";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function CommonDrawer() {
-  const profileData = useSelector(selectProfileData);
-  const isLoadingData = useSelector(selectIsLoadingData);
-  const userAuthData = useSelector(selectUserAuthData);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-
-  useEffect(() => {
-    const getName = () => {
-      if (profileData) {
-        setFirstName(profileData.firstName);
-        setLastName(profileData.lastName);
-      }
-    };
-    getName();
-  }, [profileData]);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  var displayName = null;
+  if (user !== null) {
+    displayName = user.displayName;
+  }
 
   const drawerWidth = 240;
-
+  
   return (
     <Drawer
       variant="permanent"
@@ -60,9 +47,7 @@ export default function CommonDrawer() {
             }}
           >
             <div>
-              {isLoadingData ||
-              (userAuthData && firstName === "") ||
-              (userAuthData && firstName === undefined) ? (
+              {displayName === null ? (
                 <Skeleton variant="circular" width={100} height={100} />
               ) : (
                 <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}>
@@ -79,9 +64,7 @@ export default function CommonDrawer() {
           >
             <ListItemText
               primary={
-                isLoadingData ||
-                (userAuthData && firstName === "") ||
-                (userAuthData && firstName === undefined) ? (
+                displayName === null ? (
                   <Skeleton
                     variant="text"
                     height={20}
@@ -92,7 +75,7 @@ export default function CommonDrawer() {
                     }}
                   />
                 ) : (
-                  `${firstName} ${lastName}`
+                  <div>{displayName}</div>
                 )
               }
             />

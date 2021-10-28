@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import PasswordToggleButton from "../components/PasswordToggleButton";
@@ -11,8 +15,7 @@ import TextField from "@mui/material/TextField";
 import { nanoid } from "nanoid";
 
 export default function Login() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,8 +24,7 @@ export default function Login() {
 
   function validateForm() {
     return (
-      firstName.length > 0 &&
-      lastName.length > 0 &&
+      name.length > 0 &&
       email.length > 0 &&
       password.length > 0
     );
@@ -45,11 +47,21 @@ export default function Login() {
           const user = userCredential.user;
           console.log(`user ${user.uid} is created`);
 
+          await updateProfile(auth.currentUser, {
+            displayName: name,
+            uid: user.uid,
+          })
+            .then(() => {
+              // Profile updated!
+            })
+            .catch((error) => {
+              // An error occurred
+            });
+
           try {
             await setDoc(doc(db, user.uid, "userInfo"), {
               userUid: user.uid,
-              firstName: firstName,
-              lastName: lastName,
+              name: name,
               email: user.email,
             });
 
@@ -64,10 +76,7 @@ export default function Login() {
           }
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode);
-          console.log(errorMessage);
           setResponseData(errorMessage);
         });
     } else {
@@ -81,25 +90,15 @@ export default function Login() {
       <div className="login-title">Sign up</div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="register-error-message">{responseData}</div>
-        <div className="title">First Name</div>
+        <div className="title">User Name</div>
         <div className="textfield-title">
           <TextField
             autoFocus
             variant="outlined"
-            name="firstName"
+            name="name"
             style={{ width: "100%" }}
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div className="body">Last Name</div>
-        <div className="textfield-title">
-          <TextField
-            variant="outlined"
-            name="lastName"
-            style={{ width: "100%" }}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="body">Email</div>
