@@ -26,7 +26,7 @@ export default function CommonDrawer() {
   const [lastName, setLastName] = useState("");
 
   useEffect(() => {
-    const getName = async () => {
+    const getName = () => {
       if (profileData) {
         setFirstName(profileData.firstName);
         setLastName(profileData.lastName);
@@ -61,10 +61,13 @@ export default function CommonDrawer() {
           >
             <div>
               {isLoadingData ||
-              (userAuthData && firstName === "") ? (
+              (userAuthData && firstName === "") ||
+              (userAuthData && firstName === undefined) ? (
                 <Skeleton variant="circular" width={100} height={100} />
               ) : (
-                <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}></Avatar>
+                <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}>
+                  <PersonIcon style={{ fontSize: "70px" }} />
+                </Avatar>
               )}
             </div>
           </ListItem>
@@ -77,7 +80,8 @@ export default function CommonDrawer() {
             <ListItemText
               primary={
                 isLoadingData ||
-                (userAuthData && firstName === "") ? (
+                (userAuthData && firstName === "") ||
+                (userAuthData && firstName === undefined) ? (
                   <Skeleton
                     variant="text"
                     height={20}
@@ -112,11 +116,7 @@ export default function CommonDrawer() {
               <ListItemText primary="Profile" />
             </ListItem>
           </NavLink>
-          <Signout
-          // setFirstName={setFirstName}
-          // setLastName={setLastName}
-          // firstName={firstName}
-          />
+          <Signout />
         </List>
       </Box>
     </Drawer>

@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const [title, setTitle] = useState("");
 
   useEffect(() => {
-    const getName = async () => {
+    const getName = () => {
       if (todoData[0]) {
         setTitle(todoData[0].title);
       }

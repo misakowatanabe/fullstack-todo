@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Profile() {
   const profileData = useSelector(selectProfileData);
@@ -26,13 +27,12 @@ export default function Profile() {
           >
             <div>
               <Avatar
-                alt="Avatar"
                 sx={{
                   width: 200,
                   height: 200,
                 }}
               >
-                M
+                <PersonIcon style={{ fontSize: "140px" }} />
               </Avatar>
               <div style={{ textAlign: "center", marginTop: "20px" }}>
                 Upload picture
