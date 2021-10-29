@@ -18,7 +18,9 @@ import Todo from "./dashboard/Todo";
 import Profile from "./profile/Profile";
 import CreateTodo from "./create/CreateTodo";
 import UpdateTodo from "./update/UpdateTodo";
-import NotFound from "./notFound/NotFound";
+import NotFound from "./errorPage/NotFound";
+import Error from "./errorPage/Error";
+import SnackBar from "./components/SnackBar";
 import { ENDPOINT } from "./config";
 
 export default function App() {
@@ -107,9 +109,11 @@ export default function App() {
           <PrivateRoute exact path="/profile" component={Profile} />
           <PrivateRoute exact path="/create" component={CreateTodo} />
           <PrivateRoute exact path="/update/:todoId" component={UpdateTodo} />
+          <Route exact path="/error" component={Error} />
           <Route component={NotFound} />
         </Switch>
       </HashRouter>
+      <SnackBar />
     </div>
   );
 }

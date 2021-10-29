@@ -42,7 +42,11 @@ export default function DeleteAlert({ todoId, title }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <DeleteTodo todoId={todoId} setOpen={setOpen} />
+          <DeleteTodo
+            todoId={todoId}
+            setOpen={setOpen}
+            handleClose={handleClose}
+          />
         </DialogActions>
       </Dialog>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -23,11 +23,7 @@ export default function Login() {
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
   function validateForm() {
-    return (
-      name.length > 0 &&
-      email.length > 0 &&
-      password.length > 0
-    );
+    return name.length > 0 && email.length > 0 && password.length > 0;
   }
 
   var id = nanoid(8);
@@ -38,6 +34,7 @@ export default function Login() {
   const [responseData, setResponseData] = useState(null);
   const auth = getAuth();
   const db = getFirestore();
+  const history = useHistory();
   function handleSubmit(e) {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -50,13 +47,10 @@ export default function Login() {
           await updateProfile(auth.currentUser, {
             displayName: name,
             uid: user.uid,
-          })
-            .then(() => {
-              // Profile updated!
-            })
-            .catch((error) => {
-              // An error occurred
-            });
+          }).catch((error) => {
+            // An error occurred
+            history.push(`/error`);
+          });
 
           try {
             await setDoc(doc(db, user.uid, "userInfo"), {
@@ -71,8 +65,8 @@ export default function Login() {
               body: "This is where you can write contents.",
               createdAt: date,
             });
-          } catch (e) {
-            console.error("Error adding document: ", e);
+          } catch (error) {
+            history.push(`/error`);
           }
         })
         .catch((error) => {

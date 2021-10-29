@@ -3,9 +3,10 @@ import { useHistory } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import { nanoid } from "nanoid";
 import Button1 from "../components/Button1";
+import { useDispatch } from "react-redux";
+import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import TextField from "@mui/material/TextField";
 import { ENDPOINT } from "../config";
-// const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
 
 export default function CreateTodo() {
   const [titleLetters, setTitleLetters] = useState("");
@@ -14,7 +15,7 @@ export default function CreateTodo() {
   const [bodyErrorMessage, setBodyErrorMessage] = useState("");
   const auth = getAuth();
   const userUid = auth.currentUser.uid;
-  console.log(userUid);
+
   var id = nanoid(8);
   var today = new Date();
   var date =
@@ -27,16 +28,18 @@ export default function CreateTodo() {
     createdAt: date,
   };
 
+  const errorMessage = "Please type something";
   const history = useHistory();
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (titleLetters === "" && bodyLetters === "") {
-      setTitleErrorMessage("Please type something");
-      setBodyErrorMessage("Please type something");
+      setTitleErrorMessage(errorMessage);
+      setBodyErrorMessage(errorMessage);
     } else if (titleLetters === "") {
-      setTitleErrorMessage("Please type something");
+      setTitleErrorMessage(errorMessage);
     } else if (bodyLetters === "") {
-      setBodyErrorMessage("Please type something");
+      setBodyErrorMessage(errorMessage);
     } else {
       try {
         fetch(`${ENDPOINT}/push_data_to_db`, {
@@ -46,15 +49,38 @@ export default function CreateTodo() {
             "Content-Type": "application/json",
           },
           mode: "cors",
+        }).then((res) => {
+          res.json().then((res) => {
+            if (res.message === 200) {
+              history.push("/dashboard");
+              dispatch(
+                updateSnackbar({
+                  value: true,
+                  message: "New todo created!",
+                  severity: "success",
+                })
+              );
+            } else if (res.message === 500) {
+              history.push("/error");
+              dispatch(
+                updateSnackbar({
+                  value: true,
+                  message: "Something went wrong: backend",
+                  severity: "error",
+                })
+              );
+            }
+          });
         });
-        console.log("Success");
-        setTitleLetters("");
-        setBodyLetters("");
-        setTitleErrorMessage("");
-        setBodyErrorMessage("");
-        history.push("/dashboard");
       } catch (error) {
-        console.log(error);
+        history.push("/error");
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message: "Something went wrong: frontend",
+          })
+        );
+        history.push("/error");
       }
     }
   };

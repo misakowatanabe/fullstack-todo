@@ -2,7 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
 import Button1 from "../components/Button1";
 import TextField from "@mui/material/TextField";
@@ -39,17 +40,19 @@ export default function UpdateTodo() {
     updatedAt: date,
   };
 
+  // isLoadingData on when waiting for the update or create, then off func
+  const errorMessage = "Please type something";
   let history = useHistory();
+  const dispatch = useDispatch();
   const handleUpdateTodo = (e) => {
     e.preventDefault();
     if (titleLettersUpdate === "" && bodyLettersUpdate === "") {
-      setTitleErrorMessage("Please type something");
-      setBodyErrorMessage("Please type something");
+      setTitleErrorMessage(errorMessage);
+      setBodyErrorMessage(errorMessage);
     } else if (titleLettersUpdate === "") {
-      setTitleErrorMessage("Please type something");
-      history.push(`/update/${todoId}`);
+      setTitleErrorMessage(errorMessage);
     } else if (bodyLettersUpdate === "") {
-      setBodyErrorMessage("Please type something");
+      setBodyErrorMessage(errorMessage);
     } else {
       try {
         fetch(`${ENDPOINT}/update/${todoId}`, {
@@ -59,11 +62,37 @@ export default function UpdateTodo() {
             "Content-Type": "application/json",
           },
           mode: "cors",
+        }).then((res) => {
+          res.json().then((res) => {
+            if (res.message === 200) {
+              history.push("/dashboard");
+              dispatch(
+                updateSnackbar({
+                  value: true,
+                  message: "Todo updated!",
+                  severity: "success",
+                })
+              );
+            } else if (res.message === 500) {
+              history.push("/error");
+              dispatch(
+                updateSnackbar({
+                  value: true,
+                  message: "Something went wrong: backend",
+                  severity: "error",
+                })
+              );
+            }
+          });
         });
       } catch (error) {
-        console.log(error);
-      } finally {
-        history.push("/dashboard");
+        history.push("/error");
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message: "Something went wrong: frontend",
+          })
+        );
       }
     }
   };
