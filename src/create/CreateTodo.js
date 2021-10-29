@@ -78,9 +78,9 @@ export default function CreateTodo() {
           updateSnackbar({
             value: true,
             message: "Something went wrong: frontend",
+            severity: "error",
           })
         );
-        history.push("/error");
       }
     }
   };

@@ -49,6 +49,7 @@ export default function DeleteTodo({ todoId, handleClose }) {
         updateSnackbar({
           value: true,
           message: "Something went wrong: frontend",
+          severity: "error",
         })
       );
     }

@@ -40,7 +40,6 @@ export default function UpdateTodo() {
     updatedAt: date,
   };
 
-  // isLoadingData on when waiting for the update or create, then off func
   const errorMessage = "Please type something";
   let history = useHistory();
   const dispatch = useDispatch();
@@ -91,6 +90,7 @@ export default function UpdateTodo() {
           updateSnackbar({
             value: true,
             message: "Something went wrong: frontend",
+            severity: "error",
           })
         );
       }

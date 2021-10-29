@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateTodoData } from "../context/slices/TodoDataSlice";
 import { updateProfileData } from "../context/slices/ProfileDataSlice";
+import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import { getAuth, signOut } from "firebase/auth";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -13,8 +15,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { ENDPOINT } from "../config";
 
-export default function Signout() {
+export default function DeleteAccount() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -26,8 +29,50 @@ export default function Signout() {
   };
 
   const auth = getAuth();
+  const history = useHistory();
   const dispatch = useDispatch();
-  const handleSignOut = () => {
+  const handleDeleteAccount = () => {
+    const userUid = auth.currentUser.uid;
+    try {
+      fetch(`${ENDPOINT}/deleteAccount/${userUid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+      }).then((res) => {
+        res.json().then((res) => {
+          if (res.message === 200) {
+            dispatch(
+              updateSnackbar({
+                value: true,
+                message: "Account deleted!",
+                severity: "success",
+              })
+            );
+          } else if (res.message === 500) {
+            history.push("/error");
+            dispatch(
+              updateSnackbar({
+                value: true,
+                message: "Something went wrong: backend",
+                severity: "error",
+              })
+            );
+          }
+        });
+      });
+    } catch (error) {
+      history.push("/error");
+      dispatch(
+        updateSnackbar({
+          value: true,
+          message: "Something went wrong: frontend",
+          severity: "error",
+        })
+      );
+    }
+
     dispatch(updateTodoData([{ title: "", body: "" }]));
     dispatch(updateProfileData([{ firstName: "", lastName: "" }]));
     signOut(auth)
@@ -51,7 +96,7 @@ export default function Signout() {
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>
-        <ListItemText primary="Sign Out" />
+        <ListItemText primary="Delete Account" />
       </ListItem>
       <Dialog
         open={open}
@@ -59,16 +104,22 @@ export default function Signout() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Confirm sign out"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"Confirm delete account"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you sign out?
+            Are you sure you delete your account?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancel}>Cancel</Button>
-          <Button onClick={handleSignOut} autoFocus className="signout-button">
-            Sign out
+          <Button
+            onClick={handleDeleteAccount}
+            autoFocus
+            className="signout-button"
+          >
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
