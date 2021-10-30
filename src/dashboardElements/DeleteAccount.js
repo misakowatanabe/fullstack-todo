@@ -55,7 +55,7 @@ export default function DeleteAccount() {
             dispatch(
               updateSnackbar({
                 value: true,
-                message: "Something went wrong: backend",
+                message: "Something went wrong with deleting account: backend",
                 severity: "error",
               })
             );
@@ -67,7 +67,43 @@ export default function DeleteAccount() {
       dispatch(
         updateSnackbar({
           value: true,
-          message: "Something went wrong: frontend",
+          message: "Something went wrong with deleting account: frontend",
+          severity: "error",
+        })
+      );
+    }
+
+    try {
+      fetch(`${ENDPOINT}/deleteCollection/${userUid}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+      }).then((res) => {
+        res.json().then((res) => {
+          if (res.message === 200) {
+            return;
+          } else if (res.message === 500) {
+            history.push("/error");
+            dispatch(
+              updateSnackbar({
+                value: true,
+                message:
+                  "Something went wrong with deleting your todo data: backend",
+                severity: "error",
+              })
+            );
+          }
+        });
+      });
+    } catch (error) {
+      history.push("/error");
+      dispatch(
+        updateSnackbar({
+          value: true,
+          message:
+            "Something went wrong with deleting your todo data: frontend",
           severity: "error",
         })
       );
