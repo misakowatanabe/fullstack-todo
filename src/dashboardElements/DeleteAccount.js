@@ -145,7 +145,8 @@ export default function DeleteAccount() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you delete your account?
+            Are you sure you delete your account? <br />
+            Your todos will be deleted once you delete your account.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -155,7 +156,7 @@ export default function DeleteAccount() {
             autoFocus
             className="signout-button"
           >
-            Delete
+            Delete account
           </Button>
         </DialogActions>
       </Dialog>
