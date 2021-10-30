@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateTodoData } from "../context/slices/TodoDataSlice";
 import { updateProfileData } from "../context/slices/ProfileDataSlice";
+import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import { getAuth, signOut } from "firebase/auth";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -33,11 +34,23 @@ export default function Signout() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        console.log("Sign-out successful.");
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message: "Sign out successful!",
+            severity: "success",
+          })
+        );
       })
       .catch((error) => {
         // An error happened.
-        console.log(`Sign-out failed: ${error}`);
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message: "Something went wrong with sign out",
+            severity: "error",
+          })
+        );
       });
   };
 
