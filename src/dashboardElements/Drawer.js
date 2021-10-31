@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import Signout from "./Signout";
-import DeleteAccount from "./DeleteAccount";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,7 +23,7 @@ export default function CommonDrawer() {
   }
 
   const drawerWidth = 240;
-  
+
   return (
     <Drawer
       variant="permanent"
@@ -92,16 +91,15 @@ export default function CommonDrawer() {
               <ListItemText primary="Create Todo" />
             </ListItem>
           </NavLink>
-          <NavLink to="/profile">
+          <NavLink to="/account">
             <ListItem button style={{ padding: "10px 30px" }}>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
-              <ListItemText primary="Profile" />
+              <ListItemText primary="Account" />
             </ListItem>
           </NavLink>
           <Signout />
-          <DeleteAccount />
         </List>
       </Box>
     </Drawer>

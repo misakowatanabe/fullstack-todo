@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   var currentPath;
   if (rest.path === "/dashboard") {
     currentPath = <LoadingDashboard />;
-  } else if (rest.path === "/profile") {
+  } else if (rest.path === "/account") {
     currentPath = <LoadingProfile />;
   } else if (rest.path === "/create") {
     currentPath = <LoadingCreateUpdate />;

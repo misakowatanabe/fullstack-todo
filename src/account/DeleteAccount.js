@@ -11,10 +11,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import LogoutIcon from "@mui/icons-material/Logout";
+import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
 import { ENDPOINT } from "../config";
 
 export default function DeleteAccount() {
@@ -124,16 +125,24 @@ export default function DeleteAccount() {
 
   return (
     <div>
-      <ListItem
-        button
-        onClick={handleClickOpen}
-        style={{ padding: "10px 30px" }}
+      <Paper
+        style={{
+          padding: "40px 40px",
+          height: "auto",
+          position: "relative",
+        }}
       >
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
-        <ListItemText primary="Delete Account" />
-      </ListItem>
+        <ListItem
+          button
+          onClick={handleClickOpen}
+          style={{ padding: "10px 15px" }}
+        >
+          <ListItemIcon>
+            <NoAccountsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Delete Account" />
+        </ListItem>
+      </Paper>
       <Dialog
         open={open}
         onClose={handleCancel}

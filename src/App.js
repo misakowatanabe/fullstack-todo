@@ -15,7 +15,7 @@ import PublicRoute from "./route/PublicRoute";
 import Signup from "./signup/Signup";
 import Signin from "./signin/Signin";
 import Todo from "./dashboard/Todo";
-import Profile from "./profile/Profile";
+import Account from "./account/Account";
 import CreateTodo from "./create/CreateTodo";
 import UpdateTodo from "./update/UpdateTodo";
 import NotFound from "./errorPage/NotFound";
@@ -106,7 +106,7 @@ export default function App() {
           <PublicRoute exact path="/signup" component={Signup} />
           <PublicRoute exact path="/signin" component={Signin} />
           <PrivateRoute exact path="/dashboard" component={Todo} />
-          <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/account" component={Account} />
           <PrivateRoute exact path="/create" component={CreateTodo} />
           <PrivateRoute exact path="/update/:todoId" component={UpdateTodo} />
           <Route exact path="/error" component={Error} />

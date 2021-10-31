@@ -3,7 +3,7 @@ import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
 
-export default function Profile() {
+export default function Account() {
   const auth = getAuth();
   const user = auth.currentUser;
   var displayName = null;
