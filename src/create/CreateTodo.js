@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { getAuth } from "firebase/auth";
 import { nanoid } from "nanoid";
+import CreateTodoTitle from "./CreateTodoTitle";
+import CreateTodoBody from "./CreateTodoBody";
 import Button1 from "../components/Button1";
-import { useDispatch } from "react-redux";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
-import TextField from "@mui/material/TextField";
 import { ENDPOINT } from "../config";
 
 export default function CreateTodo() {
@@ -88,36 +89,16 @@ export default function CreateTodo() {
   return (
     <div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <div className="title">
-          Title:<span className="error-message">{titleErrorMessage}</span>
-        </div>
-        <div className="textfield-title">
-          <TextField
-            placeholder="Type here ..."
-            variant="outlined"
-            multiline
-            rows={1}
-            name="letter"
-            style={{ width: "100%" }}
-            value={titleLetters || ""}
-            onChange={(e) => setTitleLetters(e.target.value)}
-          />
-        </div>
-        <div className="body">
-          Body:<span className="error-message">{bodyErrorMessage}</span>
-        </div>
-        <div className="textfield-body">
-          <TextField
-            placeholder="Type here ..."
-            variant="outlined"
-            multiline
-            rows={18}
-            name="letter"
-            style={{ width: "100%" }}
-            value={bodyLetters || ""}
-            onChange={(e) => setBodyLetters(e.target.value)}
-          />
-        </div>
+        <CreateTodoTitle
+          titleErrorMessage={titleErrorMessage}
+          titleLetters={titleLetters}
+          setTitleLetters={setTitleLetters}
+        />
+        <CreateTodoBody
+          bodyErrorMessage={bodyErrorMessage}
+          bodyLetters={bodyLetters}
+          setBodyLetters={setBodyLetters}
+        />
         <Button1>Add</Button1>
       </form>
     </div>

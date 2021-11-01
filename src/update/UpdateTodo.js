@@ -5,8 +5,9 @@ import { getAuth } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
+import UpdateTodoTitle from "./UpdateTodoTitle";
+import UpdateTodoBody from "./UpdateTodoBody";
 import Button1 from "../components/Button1";
-import TextField from "@mui/material/TextField";
 import { ENDPOINT } from "../config";
 
 export default function UpdateTodo() {
@@ -97,41 +98,21 @@ export default function UpdateTodo() {
     }
   };
 
-  if (todoData) {
-    return (
-      <div>
-        <form noValidate autoComplete="off" onSubmit={handleUpdateTodo}>
-          <div className="title">
-            Title:<span className="error-message">{titleErrorMessage}</span>
-          </div>
-          <div className="textfield-title">
-            <TextField
-              variant="outlined"
-              multiline
-              rows={1}
-              name="title"
-              style={{ width: "100%" }}
-              value={titleLettersUpdate}
-              onChange={(e) => setTitleLettersUpdate(e.target.value)}
-            />
-          </div>
-          <div className="body">
-            Body:<span className="error-message">{bodyErrorMessage}</span>
-          </div>
-          <div className="textfield-body">
-            <TextField
-              variant="outlined"
-              multiline
-              rows={18}
-              name="body"
-              style={{ width: "100%" }}
-              value={bodyLettersUpdate}
-              onChange={(e) => setBodyLettersUpdate(e.target.value)}
-            />
-          </div>
-          <Button1>Update</Button1>
-        </form>
-      </div>
-    );
-  } else return null;
+  return (
+    <div>
+      <form noValidate autoComplete="off" onSubmit={handleUpdateTodo}>
+        <UpdateTodoTitle
+          titleErrorMessage={titleErrorMessage}
+          titleLettersUpdate={titleLettersUpdate}
+          setTitleLettersUpdate={setTitleLettersUpdate}
+        />
+        <UpdateTodoBody
+          bodyErrorMessage={bodyErrorMessage}
+          bodyLettersUpdate={bodyLettersUpdate}
+          setBodyLettersUpdate={setBodyLettersUpdate}
+        />
+        <Button1>Update</Button1>
+      </form>
+    </div>
+  );
 }
