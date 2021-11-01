@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { getAuth } from "firebase/auth";
+import DrawerProfileImage from "./DrawerProfileImage";
+import DrawerProfileName from "./DrawerProfileName";
 import Signout from "./SignoutAlert";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -39,47 +41,8 @@ export default function CommonDrawer() {
       <Toolbar />
       <Box sx={{ overflow: "auto" }}>
         <List>
-          <ListItem
-            style={{
-              padding: "30px 0px 0px 0px",
-              display: "inline-flex",
-              justifyContent: "center",
-            }}
-          >
-            <div>
-              {displayName === null ? (
-                <Skeleton variant="circular" width={100} height={100} />
-              ) : (
-                <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}>
-                  <PersonIcon style={{ fontSize: "70px" }} />
-                </Avatar>
-              )}
-            </div>
-          </ListItem>
-        </List>
-        <List>
-          <ListItem
-            button
-            style={{ padding: "10px 20px", textAlign: "center" }}
-          >
-            <ListItemText
-              primary={
-                displayName === null ? (
-                  <Skeleton
-                    variant="text"
-                    height={20}
-                    width="70%"
-                    style={{
-                      textAlign: "center",
-                      margin: "-2px auto 0px auto",
-                    }}
-                  />
-                ) : (
-                  <div>{displayName}</div>
-                )
-              }
-            />
-          </ListItem>
+          <DrawerProfileImage displayName={displayName} />
+          <DrawerProfileName displayName={displayName} />
         </List>
         <Divider />
         <List>

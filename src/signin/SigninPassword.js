@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PasswordToggleButton from "../components/PasswordToggleButton";
 import TextField from "@mui/material/TextField";
 
-export default function SigninEmail({ password, setPassword }) {
+export default function SigninPassword({ password, setPassword }) {
   const [passwordShown, setPasswordShown] = useState(false);
 
   return (
