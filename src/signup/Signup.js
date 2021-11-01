@@ -7,20 +7,19 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
-import PasswordToggleButton from "../components/PasswordToggleButton";
-import "../style/App.css";
+import SignupName from "./SignupName";
+import SignupEmail from "./SignupEmail";
+import SignupPassword from "./SignupPassword";
 import Button1 from "../components/Button1";
 import LoginIcon from "../components/LoginIcon";
-import TextField from "@mui/material/TextField";
 import { nanoid } from "nanoid";
 
-export default function Login() {
+export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const [responseData, setResponseData] = useState(null);
 
   function validateForm() {
     return name.length > 0 && email.length > 0 && password.length > 0;
@@ -31,7 +30,6 @@ export default function Login() {
   var date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-  const [responseData, setResponseData] = useState(null);
   const auth = getAuth();
   const db = getFirestore();
   const history = useHistory();
@@ -84,61 +82,14 @@ export default function Login() {
       <div className="login-title">Sign up</div>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="register-error-message">{responseData}</div>
-        <div className="title">User Name</div>
-        <div className="textfield-title">
-          <TextField
-            autoFocus
-            variant="outlined"
-            name="name"
-            style={{ width: "100%" }}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="body">Email</div>
-        <div className="textfield-title">
-          <TextField
-            variant="outlined"
-            name="email"
-            style={{ width: "100%" }}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="password-text-container">
-          <div>Password</div>
-          <PasswordToggleButton
-            passwordShown={passwordShown}
-            setPasswordShown={setPasswordShown}
-          />
-        </div>
-        <div className="textfield-title">
-          <TextField
-            variant="outlined"
-            name="password"
-            type={passwordShown ? "text" : "password"}
-            style={{ width: "100%" }}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="password-text-container">
-          <div>Confirm Password</div>
-          <PasswordToggleButton
-            passwordShown={confirmPasswordShown}
-            setPasswordShown={setConfirmPasswordShown}
-          />
-        </div>
-        <div className="textfield-title">
-          <TextField
-            variant="outlined"
-            name="confirmPassword"
-            type={confirmPasswordShown ? "text" : "password"}
-            style={{ width: "100%" }}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
+        <SignupName name={name} setName={setName} />
+        <SignupEmail email={email} setEmail={setEmail} />
+        <SignupPassword
+          password={password}
+          setPassword={setPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+        />
         <div className="login-button">
           <Button1 type="submit" disabled={!validateForm()}>
             Signup
