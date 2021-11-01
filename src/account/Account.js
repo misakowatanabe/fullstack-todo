@@ -1,5 +1,5 @@
 import Profile from "./Profile";
-import DeleteAccount from "./DeleteAccount";
+import DeleteAccount from "./DeleteAccountAlert";
 
 export default function Account() {
   return (

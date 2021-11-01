@@ -1,14 +1,14 @@
 import { useState } from "react";
+import DeleteTodo from "./DeleteTodo";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import DeleteTodo from "./DeleteTodo";
 import ClearIcon from "@material-ui/icons/Clear";
 
-export default function DeleteAlert({ todoId, title }) {
+export default function DeleteTodoAlert({ todoId, title }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

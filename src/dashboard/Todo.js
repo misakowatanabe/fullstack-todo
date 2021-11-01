@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
 import OpenTodo from "../open/OpenTodo";
 import UpdateTodoLink from "../update/UpdateTodoLink";
-import DeleteAlert from "../delete/DeleteAlert";
+import DeleteAlert from "../delete/DeleteTodoAlert";
 import Preview from "./Preview";
 import Paper from "@mui/material/Paper";
 
