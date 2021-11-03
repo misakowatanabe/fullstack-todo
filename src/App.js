@@ -14,7 +14,7 @@ import PrivateRoute from "./route/PrivateRoute";
 import PublicRoute from "./route/PublicRoute";
 import Signup from "./signup/Signup";
 import Signin from "./signin/Signin";
-import Todo from "./dashboard/Todo";
+import Todo from "./dashboardContents/Todo";
 import Account from "./account/Account";
 import CreateTodo from "./create/CreateTodo";
 import UpdateTodo from "./update/UpdateTodo";
