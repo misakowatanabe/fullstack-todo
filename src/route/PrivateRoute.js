@@ -7,7 +7,7 @@ import { selectTodoData } from "../context/slices/TodoDataSlice";
 import LoadingDashboard from "../loading/LoadingDashboard";
 import LoadingProfile from "../loading/LoadingProfile";
 import LoadingCreateUpdate from "../loading/LoadingCreateUpdate";
-import Dashboard from "../dashboardElements/Common";
+import Dashboard from "../dashboardElements/Dashboard";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const userAuthData = useSelector(selectUserAuthData);

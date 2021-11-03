@@ -1,5 +1,3 @@
-import { getAuth } from "firebase/auth";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";

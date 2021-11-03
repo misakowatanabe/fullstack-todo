@@ -1,20 +1,13 @@
-import { NavLink } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import DrawerProfileImage from "./DrawerProfileImage";
 import DrawerProfileName from "./DrawerProfileName";
+import DrawerOthers from "./DrawerOthers";
 import Signout from "./SignoutAlert";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import AddIcon from "@mui/icons-material/Add";
-import PersonIcon from "@mui/icons-material/Person";
-import Avatar from "@mui/material/Avatar";
-import Skeleton from "@mui/material/Skeleton";
 
 export default function CommonDrawer() {
   const auth = getAuth();
@@ -46,22 +39,7 @@ export default function CommonDrawer() {
         </List>
         <Divider />
         <List>
-          <NavLink to="/create">
-            <ListItem button style={{ padding: "10px 30px" }}>
-              <ListItemIcon>
-                <AddIcon />
-              </ListItemIcon>
-              <ListItemText primary="Create Todo" />
-            </ListItem>
-          </NavLink>
-          <NavLink to="/account">
-            <ListItem button style={{ padding: "10px 30px" }}>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary="Account" />
-            </ListItem>
-          </NavLink>
+          <DrawerOthers />
           <Signout />
         </List>
       </Box>
