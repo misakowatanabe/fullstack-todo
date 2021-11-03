@@ -3,7 +3,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Button from "@mui/material/Button";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import EditIcon from "@mui/icons-material/Edit";
-import ClearIcon from "@material-ui/icons/Clear";
+import ClearIcon from "@mui/icons-material/Clear";
 
 export default function LoadingDashboard() {
   return (

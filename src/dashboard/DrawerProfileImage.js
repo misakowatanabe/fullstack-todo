@@ -1,9 +1,17 @@
+import { getAuth } from "firebase/auth";
 import ListItem from "@mui/material/ListItem";
 import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";
 import Skeleton from "@mui/material/Skeleton";
 
-export default function DrawerProfileImage({ displayName }) {
+export default function DrawerProfileImage() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  var displayName = null;
+  if (user !== null) {
+    displayName = user.displayName;
+  }
+
   const Image = () => {
     var avatar;
     if (displayName === null) {

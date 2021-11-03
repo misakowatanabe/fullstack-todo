@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function UpdateTodoLink({ todoId }) {

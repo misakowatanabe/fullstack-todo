@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth } from "firebase/auth";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import { ENDPOINT } from "../config";
 
 export default function DeleteTodo({ todoId, handleClose }) {

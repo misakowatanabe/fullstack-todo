@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function Button1({ children, disabled }) {
   return (
