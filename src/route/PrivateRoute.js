@@ -5,7 +5,7 @@ import { selectUserAuthData } from "../context/slices/UserAuthDataSlice";
 import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
 import LoadingDashboard from "../loading/LoadingDashboard";
-import LoadingProfile from "../loading/LoadingProfile";
+import LoadingProfile from "../loading/LoadingAccount";
 import LoadingCreateUpdate from "../loading/LoadingCreateUpdate";
 import Dashboard from "../dashboard/Dashboard";
 

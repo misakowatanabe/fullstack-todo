@@ -1,9 +1,10 @@
 import { getAuth } from "firebase/auth";
-import Paper from "@mui/material/Paper";
+import ProfileContainer from "../components/ProfileContainer";
 import Avatar from "@mui/material/Avatar";
 import PersonIcon from "@mui/icons-material/Person";
+import Grid from "@mui/material/Grid";
 
-export default function Account() {
+export default function Profile() {
   const auth = getAuth();
   const user = auth.currentUser;
   var displayName = null;
@@ -15,41 +16,25 @@ export default function Account() {
 
   return (
     <div>
-      <Paper
-        style={{
-          padding: "40px 40px",
-          height: "auto",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-            alignItems: "center",
-          }}
-        >
+      <ProfileContainer>
+        <Grid item sx={{ margin: "10px" }}>
+          <Avatar
+            sx={{
+              width: 200,
+              height: 200,
+            }}
+          >
+            <PersonIcon style={{ fontSize: "140px" }} />
+          </Avatar>
+        </Grid>
+        <Grid item sx={{ margin: "10px" }}>
           <div>
-            <Avatar
-              sx={{
-                width: 200,
-                height: 200,
-              }}
-            >
-              <PersonIcon style={{ fontSize: "140px" }} />
-            </Avatar>
-            <div style={{ textAlign: "center", marginTop: "20px" }}>
-              Upload picture
-            </div>
-          </div>
-          <div style={{ marginLeft: "40px" }}>
             <div>Name: {displayName}</div>
             <div>Email: {email}</div>
             <div>Edit</div>
           </div>
-        </div>
-      </Paper>
+        </Grid>
+      </ProfileContainer>
     </div>
   );
 }

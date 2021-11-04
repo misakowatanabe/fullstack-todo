@@ -5,9 +5,7 @@ export default function Account() {
   return (
     <div>
       <Profile />
-      <div style={{ marginTop: "20px" }}>
-        <DeleteAccount />
-      </div>
+      <DeleteAccount />
     </div>
   );
 }
