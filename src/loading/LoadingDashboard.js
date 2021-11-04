@@ -1,4 +1,5 @@
-import Paper from "@mui/material/Paper";
+import TodoPaper from "../components/TodoPaper";
+import TodoPaperContainer from "../components/TodoPaperContainer";
 import Skeleton from "@mui/material/Skeleton";
 import Button from "@mui/material/Button";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
@@ -7,24 +8,9 @@ import ClearIcon from "@mui/icons-material/Clear";
 
 export default function LoadingDashboard() {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-      }}
-    >
+    <TodoPaperContainer>
       {[1, 2].map((index) => (
-        <Paper
-          key={index}
-          style={{
-            margin: "10px",
-            padding: "10px 20px",
-            height: "200px",
-            width: "350px",
-            position: "relative",
-          }}
-        >
+        <TodoPaper key={index}>
           <Button
             className="preview-edit-delete-button"
             style={{ position: "absolute", right: "75px" }}
@@ -48,8 +34,8 @@ export default function LoadingDashboard() {
           <Skeleton height={20} width="100%" />
           <Skeleton height={20} width="50%" />
           <Skeleton height={20} width="40%" style={{ marginTop: 45 }} />
-        </Paper>
+        </TodoPaper>
       ))}
-    </div>
+    </TodoPaperContainer>
   );
 }

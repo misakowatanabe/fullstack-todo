@@ -45,10 +45,11 @@ a:-webkit-any-link {
 .todo-title {
   font-size: 20px;
   color: #313131;
+  white-space: pre-wrap;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 212px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .todo-body {
@@ -63,21 +64,20 @@ a:-webkit-any-link {
 }
 
 .todo-createdAt {
-  font-size: 16px;
+  font-size: 13px;
   color: #868686;
-  margin: 150px 0px 0px 0px;
+  margin: 120px 0px 0px 0px;
   overflow: hidden;
   display: -webkit-box;
   position: absolute;
 }
 
 .todo-updatedAt {
-  font-size: 16px;
+  font-size: 13px;
   color: #5da708;
-  margin: 150px 0px 0px 166px;
+  margin: 0px 0px 0px 10px;
   overflow: hidden;
   display: -webkit-box;
-  position: absolute;
 }
 
 /* paper end */
