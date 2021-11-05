@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import SigninSignupContainer from "../components/SigninSignupContainer";
 import SigninEmail from "./SigninEmail";
 import SigninPassword from "./SigninPassword";
 import Button1 from "../components/Button1";
-import LoginIcon from "../components/LoginIcon";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -30,16 +30,14 @@ export default function Signin() {
   }
 
   return (
-    <div className="Login">
-      <LoginIcon />
-      <div className="login-title">Sign in</div>
+    <SigninSignupContainer title={"Sign In"}>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="register-error-message">{responseData}</div>
         <SigninEmail email={email} setEmail={setEmail} />
         <SigninPassword password={password} setPassword={setPassword} />
         <div className="login-button">
           <Button1 type="submit" disabled={!validateForm()}>
-            Login
+            Signin
           </Button1>
         </div>
         <NavLink to={`/signup`}>
@@ -48,6 +46,6 @@ export default function Signin() {
           </div>
         </NavLink>
       </form>
-    </div>
+    </SigninSignupContainer>
   );
 }

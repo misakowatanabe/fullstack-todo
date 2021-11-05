@@ -7,11 +7,11 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
+import SigninSignupContainer from "../components/SigninSignupContainer";
 import SignupName from "./SignupName";
 import SignupEmail from "./SignupEmail";
 import SignupPassword from "./SignupPassword";
 import Button1 from "../components/Button1";
-import LoginIcon from "../components/LoginIcon";
 import { nanoid } from "nanoid";
 
 export default function Signup() {
@@ -77,9 +77,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="Login">
-      <LoginIcon />
-      <div className="login-title">Sign up</div>
+    <SigninSignupContainer title={"Sign In"}>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="register-error-message">{responseData}</div>
         <SignupName name={name} setName={setName} />
@@ -101,6 +99,6 @@ export default function Signup() {
           </div>
         </NavLink>
       </form>
-    </div>
+    </SigninSignupContainer>
   );
 }
