@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import UpdatedAt from "./UpdatedAt";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -63,9 +64,7 @@ export default function OpenTodo({
             {body}
             <div className="created-dialog">
               Created: {createdAt}
-              {updatedAt && (
-                <span className="updated-dialog">Updated: {updatedAt}</span>
-              )}
+              <UpdatedAt updatedAt={updatedAt} />
             </div>
           </DialogContentText>
         </DialogContent>

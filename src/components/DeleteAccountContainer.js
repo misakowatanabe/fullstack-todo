@@ -4,9 +4,9 @@ import Paper from "@mui/material/Paper";
 export default function DeleteAccountContainer({ children, handleClickOpen }) {
   return (
     <Paper
-      style={{
+      sx={{
         marginTop: "20px",
-        padding: "40px 40px",
+        padding: { xs: "20px 20px", sm: "40px 40px" },
         height: "auto",
         position: "relative",
       }}

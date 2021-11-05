@@ -6,8 +6,8 @@ export default function ProfileContainer({ children }) {
   return (
     <div>
       <Paper
-        style={{
-          padding: "40px 40px",
+        sx={{
+          padding: { xs: "20px 20px", sm: "40px 40px" },
           height: "auto",
           position: "relative",
         }}
