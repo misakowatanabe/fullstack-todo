@@ -77,7 +77,7 @@ export default function Signup() {
   }
 
   return (
-    <SigninSignupContainer title={"Sign In"}>
+    <SigninSignupContainer title={"Sign Up"}>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <div className="register-error-message">{responseData}</div>
         <SignupName name={name} setName={setName} />

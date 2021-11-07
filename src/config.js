@@ -1,2 +1,1 @@
-// export const ENDPOINT = "https://fullstack-todo-backend-misako.herokuapp.com";
-export const ENDPOINT = "http://localhost:3001";
+export var ENDPOINT = process.env.REACT_APP_ENV;
