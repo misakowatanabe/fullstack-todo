@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/fullstack-todo/static/css/main.63156bec.chunk.css",
-    "main.js": "/fullstack-todo/static/js/main.d649ab4f.chunk.js",
-    "main.js.map": "/fullstack-todo/static/js/main.d649ab4f.chunk.js.map",
+    "main.js": "/fullstack-todo/static/js/main.ae26c3bc.chunk.js",
+    "main.js.map": "/fullstack-todo/static/js/main.ae26c3bc.chunk.js.map",
     "runtime-main.js": "/fullstack-todo/static/js/runtime-main.9c1dfa7f.js",
     "runtime-main.js.map": "/fullstack-todo/static/js/runtime-main.9c1dfa7f.js.map",
-    "static/js/2.c95d7ba2.chunk.js": "/fullstack-todo/static/js/2.c95d7ba2.chunk.js",
-    "static/js/2.c95d7ba2.chunk.js.map": "/fullstack-todo/static/js/2.c95d7ba2.chunk.js.map",
+    "static/js/2.c6640216.chunk.js": "/fullstack-todo/static/js/2.c6640216.chunk.js",
+    "static/js/2.c6640216.chunk.js.map": "/fullstack-todo/static/js/2.c6640216.chunk.js.map",
     "index.html": "/fullstack-todo/index.html",
     "static/css/main.63156bec.chunk.css.map": "/fullstack-todo/static/css/main.63156bec.chunk.css.map",
-    "static/js/2.c95d7ba2.chunk.js.LICENSE.txt": "/fullstack-todo/static/js/2.c95d7ba2.chunk.js.LICENSE.txt"
+    "static/js/2.c6640216.chunk.js.LICENSE.txt": "/fullstack-todo/static/js/2.c6640216.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9c1dfa7f.js",
-    "static/js/2.c95d7ba2.chunk.js",
+    "static/js/2.c6640216.chunk.js",
     "static/css/main.63156bec.chunk.css",
-    "static/js/main.d649ab4f.chunk.js"
+    "static/js/main.ae26c3bc.chunk.js"
   ]
 }
