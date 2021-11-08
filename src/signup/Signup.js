@@ -68,8 +68,17 @@ export default function Signup() {
           }
         })
         .catch((error) => {
-          const errorMessage = error.message;
-          setResponseData(errorMessage);
+          var errorMessage = error.message;
+          if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
+            setResponseData("This email adress is already in use.");
+          } else if (
+            errorMessage ===
+            "Firebase: Password should be at least 6 characters (auth/weak-password)."
+          ) {
+            setResponseData("Password should be at least 6 characters.");
+          } else {
+            setResponseData(errorMessage);
+          }
         });
     } else {
       setResponseData("Your password and confirmation password do not match.");
