@@ -106,3 +106,6 @@ dist
 
 # Mac cache
 .DS_Store
+
+# production
+/build
