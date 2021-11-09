@@ -25,7 +25,16 @@ export default function Signin() {
         console.log(user);
       })
       .catch((error) => {
-        setResponseData(error.message);
+        var errorMessage = error.message;
+        if (errorMessage === "Firebase: Error (auth/user-not-found).") {
+          setResponseData("User not found. Please check your email adress.");
+        } else if (errorMessage === "Firebase: Error (auth/wrong-password).") {
+          setResponseData("Password seems wrong, please check it again.");
+        } else if (errorMessage === "Firebase: Error (auth/network-request-failed).") {
+          setResponseData("Something went wrong with network. Please check your internet connection.");
+        } else {
+          setResponseData(`${errorMessage} Please contact _______.`);
+        }
       });
   }
 

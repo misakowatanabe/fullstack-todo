@@ -76,8 +76,14 @@ export default function Signup() {
             "Firebase: Password should be at least 6 characters (auth/weak-password)."
           ) {
             setResponseData("Password should be at least 6 characters.");
+          } else if (
+            errorMessage === "Firebase: Error (auth/network-request-failed)."
+          ) {
+            setResponseData(
+              "Something went wrong with network. Please check your internet connection."
+            );
           } else {
-            setResponseData(errorMessage);
+            setResponseData(`${errorMessage} Please contact _______.`);
           }
         });
     } else {
