@@ -1,25 +1,26 @@
 import Button from "@mui/material/Button";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import BuildIcon from "@mui/icons-material/Build";
 
-export default function Button1({ children, disabled }) {
+export default function Button2({ children, disabled, onClick }) {
   return (
-    <div style={{ margin: "0 auto", textAlign: "center" }}>
+    <div style={{ margin: "20px 0px 0px 0px" }}>
       <Button
-        type="submit"
+        onClick={onClick}
         variant="contained"
         disabled={disabled}
         style={
           disabled
             ? { padding: "10px 14px 10px 25px", borderRadius: "25px" }
             : {
-                backgroundColor: "#1976d2",
+                backgroundColor: "#9c9c9c",
                 padding: "10px 14px 10px 25px",
                 borderRadius: "25px",
+                boxShadow: "none",
               }
         }
       >
         {children}
-        <KeyboardArrowRightIcon />
+        <BuildIcon sx={{ fontSize: "20px", margin: "0px 5px 0px 11px" }} />
       </Button>
     </div>
   );

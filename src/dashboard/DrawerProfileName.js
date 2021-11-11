@@ -1,19 +1,17 @@
-import { getAuth } from "firebase/auth";
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function DrawerProfileName() {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  var displayName = null;
-  if (user !== null) {
-    displayName = user.displayName;
-  }
+  const profileData = useSelector(selectProfileData);
+  var displayName = profileData.name;
 
   const Name = () => {
     var userName;
-    if (displayName === null) {
+    if (displayName === undefined) {
       userName = (
         <Skeleton
           variant="text"

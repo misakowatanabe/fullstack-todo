@@ -7,7 +7,7 @@ export default function ProfileContainer({ children }) {
     <div>
       <Paper
         sx={{
-          padding: { xs: "20px 20px", sm: "40px 40px" },
+          padding: { xs: "20px 20px", sm: "30px 30px" },
           height: "auto",
           position: "relative",
         }}

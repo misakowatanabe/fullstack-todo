@@ -1,20 +1,17 @@
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
+import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import ListItem from "@mui/material/ListItem";
 import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function DrawerProfileImage() {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  var displayName = null;
-  if (user !== null) {
-    displayName = user.displayName;
-  }
+ const profileData = useSelector(selectProfileData);
+ var displayName = profileData.name;
 
   const Image = () => {
     var avatar;
-    if (displayName === null) {
+    if (displayName === undefined) {
       avatar = <Skeleton variant="circular" width={100} height={100} />;
     } else {
       avatar = (

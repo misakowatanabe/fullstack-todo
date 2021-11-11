@@ -1,9 +1,9 @@
 import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
-export default function Button1({ children, disabled }) {
+export default function Button3({ children, disabled }) {
   return (
-    <div style={{ margin: "0 auto", textAlign: "center" }}>
+    <div style={{ margin: "10px 0px 0px 0px" }}>
       <Button
         type="submit"
         variant="contained"
