@@ -145,15 +145,17 @@ export default function ProfileEditForm({
   useEffect(() => {
     if (emailErrorMessage === "auth/invalid-email" && authEmailStatus) {
       setEditMode(true);
+      setEmailErrorMessage("Invalid email.");
     } else if (
       emailErrorMessage === "auth/requires-recent-login" &&
       authEmailStatus
     ) {
       setEditMode(true);
+      setEmailErrorMessage("Please signin again.");
     } else if (emailErrorMessage === "" && authEmailStatus) {
       setEditMode(false);
     }
-  }, [emailErrorMessage, setEditMode, authEmailStatus]);
+  }, [emailErrorMessage, setEditMode, authEmailStatus, setEmailErrorMessage]);
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
