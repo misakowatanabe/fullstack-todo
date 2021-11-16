@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectProfileData } from "../context/slices/ProfileDataSlice";
+import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function DrawerProfileName() {
   const profileData = useSelector(selectProfileData);
-  var displayName = profileData.name;
+  const isLoadingData = useSelector(selectIsLoadingData);
+  const [displayName, setDisplayName] = useState("");
+  console.log(profileData);
+  console.log(displayName);
+
+  useEffect(() => {
+    if (profileData) {
+      setDisplayName(profileData.name);
+    }
+  }, [profileData]);
 
   const Name = () => {
     var userName;
-    if (displayName === undefined) {
+    if (displayName === "" || displayName === undefined || isLoadingData) {
       userName = (
         <Skeleton
           variant="text"

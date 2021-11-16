@@ -7,7 +7,6 @@ import { selectTodoData } from "../context/slices/TodoDataSlice";
 import LoadingDashboard from "../loading/LoadingDashboard";
 import LoadingProfile from "../loading/LoadingAccount";
 import LoadingCreateUpdate from "../loading/LoadingCreateUpdate";
-import Dashboard from "../dashboard/Dashboard";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const userAuthData = useSelector(selectUserAuthData);
@@ -36,21 +35,19 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   }
 
   return (
-    <Dashboard>
-      <Route
-        {...rest}
-        render={(props) =>
-          isLoadingData || (userAuthData && title === "") ? (
-            currentPath
-          ) : userAuthData ? (
-            <Component {...props} />
-          ) : (
-            <Redirect to="/signin" />
-          )
-        }
-      />
-    </Dashboard>
+    <Route
+      {...rest}
+      render={(props) =>
+        isLoadingData ||
+        (userAuthData && title === "") ? (
+          currentPath
+        ) : userAuthData ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/signin" />
+        )
+      }
+    />
   );
 };
-
 export default PrivateRoute;

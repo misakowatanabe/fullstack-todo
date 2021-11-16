@@ -1,9 +1,14 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateTodoData } from "./context/slices/TodoDataSlice";
 import { updateProfileData } from "./context/slices/ProfileDataSlice";
 import { updateUserAuthData } from "./context/slices/UserAuthDataSlice";
 import { updateIsLoadingData } from "./context/slices/IsLoadingDataSlice";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import {
+  updateProfileImageData,
+  selectProfileImageData,
+} from "./context/slices/ProfileImageDataSlice";
 import "./style/App.css";
 import socketIOClient from "socket.io-client";
 import { initializeApp } from "firebase/app";
@@ -22,11 +27,14 @@ import NotFound from "./errorPage/NotFound";
 import Error from "./errorPage/Error";
 import SnackBar from "./components/SnackBar";
 import { ENDPOINT } from "./config";
+import Dashboard from "./dashboard/Dashboard";
 
 export default function App() {
   initializeApp(firebaseConfig);
   const dispatch = useDispatch();
   const auth = getAuth();
+  const storage = getStorage();
+  const profileImageData = useSelector(selectProfileImageData);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -46,8 +54,6 @@ export default function App() {
         const socketProfile = socketIOClient(ENDPOINT);
         socketProfile.on("newChangesInProfile", (profileList) => {
           dispatch(updateProfileData(profileList));
-          dispatch(updateIsLoadingData(false));
-          console.log(`Loading OK`);
         });
         console.log("Socket opened");
 
@@ -67,6 +73,31 @@ export default function App() {
         } catch (error) {
           console.log(error);
         }
+
+        const imagesDownloadRef = ref(storage, `profileImages/${uid}`);
+        getDownloadURL(imagesDownloadRef)
+          .then((url) => {
+            dispatch(updateProfileImageData(url));
+            console.log("url exsits");
+          })
+          .catch((error) => {
+            switch (error.code) {
+              case "storage/object-not-found":
+                dispatch(updateProfileImageData(null));
+                break;
+              case "storage/unauthorized":
+                break;
+              case "storage/canceled":
+                break;
+              case "storage/unknown":
+                break;
+              default:
+            }
+          })
+          .finally(() => {
+            dispatch(updateIsLoadingData(false));
+            console.log(`Loading OK`);
+          });
 
         user.getIdTokenResult().then((idTokenResult) => {
           const authTime = idTokenResult.claims.auth_time * 1000;
@@ -97,18 +128,31 @@ export default function App() {
       }
     });
     return () => unsubscribe(() => {});
-  }, [auth, dispatch]);
+  }, [auth, dispatch, storage, profileImageData]);
 
   return (
     <div className="App">
       <HashRouter>
         <Switch>
-          <PublicRoute exact path="/signup" component={Signup} />
-          <PublicRoute exact path="/signin" component={Signin} />
-          <PrivateRoute exact path="/dashboard" component={Todo} />
-          <PrivateRoute exact path="/account" component={Account} />
-          <PrivateRoute exact path="/create" component={CreateTodo} />
-          <PrivateRoute exact path="/update/:todoId" component={UpdateTodo} />
+          <Route exact path={["/signup", "/signin"]}>
+            <PublicRoute exact path="/signup" component={Signup} />
+            <PublicRoute exact path="/signin" component={Signin} />
+          </Route>
+          <Route
+            exact
+            path={["/dashboard", "/account", "/create", "/update/:todoId"]}
+          >
+            <Dashboard>
+              <PrivateRoute exact path="/dashboard" component={Todo} />
+              <PrivateRoute exact path="/account" component={Account} />
+              <PrivateRoute exact path="/create" component={CreateTodo} />
+              <PrivateRoute
+                exact
+                path="/update/:todoId"
+                component={UpdateTodo}
+              />
+            </Dashboard>
+          </Route>
           <Route exact path="/error" component={Error} />
           <Route component={NotFound} />
         </Switch>

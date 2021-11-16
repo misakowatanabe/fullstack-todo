@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import ProfileContainer from "../components/ProfileContainer";
+import ProfileImage from "./ProfileImage";
 import ProfilePresentation from "./ProfilePresentation";
 import ProfileEditForm from "./ProfileEditForm";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 import Button2 from "../components/Button2";
 
@@ -40,14 +39,7 @@ export default function Profile() {
     <div>
       <ProfileContainer>
         <Grid item sx={{ margin: "10px" }}>
-          <Avatar
-            sx={{
-              width: 200,
-              height: 200,
-            }}
-          >
-            <PersonIcon style={{ fontSize: "140px" }} />
-          </Avatar>
+          <ProfileImage />
         </Grid>
         <Grid item sx={{ margin: "10px" }}>
           <div>

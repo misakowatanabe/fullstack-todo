@@ -1,23 +1,34 @@
 import { useSelector } from "react-redux";
-import { selectProfileData } from "../context/slices/ProfileDataSlice";
+import { selectProfileImageData } from "../context/slices/ProfileImageDataSlice";
+import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
 import ListItem from "@mui/material/ListItem";
 import PersonIcon from "@mui/icons-material/Person";
 import Avatar from "@mui/material/Avatar";
 import Skeleton from "@mui/material/Skeleton";
 
 export default function DrawerProfileImage() {
- const profileData = useSelector(selectProfileData);
- var displayName = profileData.name;
+  const profileImageData = useSelector(selectProfileImageData);
+  const isLoadingData = useSelector(selectIsLoadingData);
 
   const Image = () => {
     var avatar;
-    if (displayName === undefined) {
+    if (isLoadingData) {
       avatar = <Skeleton variant="circular" width={100} height={100} />;
-    } else {
+    } else if (profileImageData === null) {
       avatar = (
         <Avatar alt="Avatar" sx={{ width: 100, height: 100 }}>
           <PersonIcon style={{ fontSize: "70px" }} />
         </Avatar>
+      );
+    } else {
+      avatar = (
+        <img
+          src={profileImageData}
+          alt="profile"
+          width="100"
+          height="100"
+          style={{ borderRadius: "50px" }}
+        />
       );
     }
     return avatar;
