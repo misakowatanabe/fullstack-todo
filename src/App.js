@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodoData, selectTodoData } from "./context/slices/TodoDataSlice";
+import { updateTodoData } from "./context/slices/TodoDataSlice";
 import { updateProfileData } from "./context/slices/ProfileDataSlice";
 import { updateUserAuthData } from "./context/slices/UserAuthDataSlice";
 import { updateIsLoadingData } from "./context/slices/IsLoadingDataSlice";
@@ -9,7 +9,6 @@ import {
   updateProfileImageData,
   selectProfileImageData,
 } from "./context/slices/ProfileImageDataSlice";
-import { selectIsLoadingData } from "./context/slices/IsLoadingDataSlice";
 import "./style/App.css";
 import socketIOClient from "socket.io-client";
 import { initializeApp } from "firebase/app";
@@ -36,11 +35,6 @@ export default function App() {
   const auth = getAuth();
   const storage = getStorage();
   const profileImageData = useSelector(selectProfileImageData);
-  const isLoadingData = useSelector(selectIsLoadingData);
-  const todoData = useSelector(selectTodoData);
-  console.log(isLoadingData);
-  console.log(todoData);
-  console.log(todoData[0]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -73,7 +67,7 @@ export default function App() {
             mode: "cors",
           }).then((res) => {
             res.json().then((data) => {
-              console.log(data);
+              // Successfully sent uid to backend
             });
           });
         } catch (error) {
@@ -86,18 +80,7 @@ export default function App() {
             dispatch(updateProfileImageData(url));
           })
           .catch((error) => {
-            switch (error.code) {
-              case "storage/object-not-found":
-                dispatch(updateProfileImageData(""));
-                break;
-              case "storage/unauthorized":
-                break;
-              case "storage/canceled":
-                break;
-              case "storage/unknown":
-                break;
-              default:
-            }
+            dispatch(updateProfileImageData(""));
           })
           .finally(() => {
             dispatch(updateIsLoadingData(false));

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUserAuthData } from "../context/slices/UserAuthDataSlice";
@@ -11,23 +11,24 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const userAuthData = useSelector(selectUserAuthData);
   const isLoadingData = useSelector(selectIsLoadingData);
 
-  var currentPath;
-  if (rest.path === "/dashboard") {
-    currentPath = <LoadingDashboard />;
-  } else if (rest.path === "/account") {
-    currentPath = <LoadingProfile />;
-  } else if (rest.path === "/create") {
-    currentPath = <LoadingCreateUpdate />;
-  } else if (rest.path === "/update/:todoId") {
-    currentPath = <LoadingCreateUpdate />;
-  }
+  const CurrentPathSkeleton = () => {
+    if (rest.path === "/dashboard") {
+      return <LoadingDashboard />;
+    } else if (rest.path === "/account") {
+      return <LoadingProfile />;
+    } else if (rest.path === "/create") {
+      return <LoadingCreateUpdate />;
+    } else if (rest.path === "/update/:todoId") {
+      return <LoadingCreateUpdate />;
+    }
+  };
 
   return (
     <Route
       {...rest}
       render={(props) =>
         isLoadingData ? (
-          currentPath
+          <CurrentPathSkeleton />
         ) : userAuthData ? (
           <Component {...props} />
         ) : (
