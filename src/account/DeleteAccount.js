@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProfileImageData } from "../context/slices/ProfileImageDataSlice";
 import { getAuth, signOut } from "firebase/auth";
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
@@ -11,25 +12,21 @@ export default function DeleteAccount() {
   const storage = getStorage();
   const history = useHistory();
   const dispatch = useDispatch();
+  const profileImageData = useSelector(selectProfileImageData);
 
   const handleDeleteAccount = async () => {
     const userUid = auth.currentUser.uid;
 
-    try {
-      const imageRef = ref(storage, `profileImages/${userUid}`);
-      await deleteObject(imageRef).then(() => {
-        // Profile image deleted successfully
-      });
-    } catch (error) {
-      // An error occurred
-      history.push("/error");
-      dispatch(
-        updateSnackbar({
-          value: true,
-          message: "Something went wrong with deleting profile image",
-          severity: "error",
-        })
-      );
+    if (profileImageData !== "") {
+      try {
+        const imageRef = ref(storage, `profileImages/${userUid}`);
+        await deleteObject(imageRef).then(() => {
+          // Profile image deleted successfully
+        });
+      } catch (error) {
+        // An error occurred
+        history.push("/error");
+      }
     }
 
     const deleteCollectionAndAccount = async () => {
