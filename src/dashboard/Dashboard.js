@@ -1,6 +1,5 @@
 import { useState } from "react";
-import DrawerProfileImage from "./DrawerProfileImage";
-import DrawerProfileName from "./DrawerProfileName";
+import SwitchDrawerProfile from "./SwitchDrawerProfile";
 import DrawerOthers from "./DrawerOthers";
 import Signout from "./SignoutAlert";
 import CommonAppBar from "./CommonAppBar";
@@ -24,8 +23,7 @@ export default function Dashboard(props) {
       <Toolbar />
       <Divider />
       <List>
-        <DrawerProfileImage />
-        <DrawerProfileName />
+        <SwitchDrawerProfile />
       </List>
       <Divider />
       <List>

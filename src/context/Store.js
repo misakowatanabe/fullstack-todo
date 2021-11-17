@@ -4,7 +4,6 @@ import profileDataReducer from "./slices/ProfileDataSlice";
 import profileImageDataReducer from "./slices/ProfileImageDataSlice";
 import userAuthDataReducer from "./slices/UserAuthDataSlice";
 import isLoadingDataReducer from "./slices/IsLoadingDataSlice";
-import userDataReducer from "./slices/UserDataSlice";
 import snackbarReducer from "./slices/SnackbarSlice";
 
 export default configureStore({
@@ -14,7 +13,6 @@ export default configureStore({
     profileImageData: profileImageDataReducer,
     userAuthData: userAuthDataReducer,
     isLoadingData: isLoadingDataReducer,
-    userData: userDataReducer,
     snackbar: snackbarReducer,
   },
 });

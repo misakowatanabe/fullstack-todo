@@ -78,12 +78,11 @@ export default function App() {
         getDownloadURL(imagesDownloadRef)
           .then((url) => {
             dispatch(updateProfileImageData(url));
-            console.log("url exsits");
           })
           .catch((error) => {
             switch (error.code) {
               case "storage/object-not-found":
-                dispatch(updateProfileImageData(null));
+                dispatch(updateProfileImageData(""));
                 break;
               case "storage/unauthorized":
                 break;
@@ -122,6 +121,11 @@ export default function App() {
         // User is signed out
         dispatch(updateUserAuthData(false));
         dispatch(updateIsLoadingData(false));
+        dispatch(updateTodoData([{ title: null, body: null }]));
+        dispatch(
+          updateProfileData([{ name: null, email: null, userUid: null }])
+        );
+        dispatch(updateProfileImageData(null));
 
         clearTimeout(userSessionTimeout);
         userSessionTimeout = null;

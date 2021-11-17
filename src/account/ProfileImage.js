@@ -8,21 +8,16 @@ import {
   getDownloadURL,
   deleteObject,
 } from "firebase/storage";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
-import {
-  selectProfileImageData,
-  updateProfileImageData,
-} from "../context/slices/ProfileImageDataSlice";
-import Avatar from "@mui/material/Avatar";
-import PersonIcon from "@mui/icons-material/Person";
+import { updateProfileImageData } from "../context/slices/ProfileImageDataSlice";
+import SwitchProfileImage from "./SwitchProfileImage";
 import Button from "@mui/material/Button";
 
 export default function ProfileImage() {
   const storage = getStorage();
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
-  const profileImageData = useSelector(selectProfileImageData);
   const auth = getAuth();
   const userUid = auth.currentUser.uid;
   const imagesRef = ref(storage, `profileImages/${userUid}`);
@@ -55,36 +50,24 @@ export default function ProfileImage() {
     deleteObject(imagesRef)
       .then(() => {
         // File deleted successfully
-        dispatch(updateProfileImageData(null));
+        dispatch(updateProfileImageData(""));
       })
       .catch((error) => {
         // An error occurred
-         history.push("/error");
-         dispatch(
-           updateSnackbar({
-             value: true,
-             message: "Something went wrong with deleting profile image",
-             severity: "error",
-           })
-         );
+        history.push("/error");
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message: "Something went wrong with deleting profile image",
+            severity: "error",
+          })
+        );
       });
   };
 
   return (
     <div>
-      {profileImageData !== null ? (
-        <img
-          src={profileImageData}
-          alt="profile"
-          width="200"
-          height="200"
-          style={{ borderRadius: "100px" }}
-        />
-      ) : (
-        <Avatar alt="Avatar" sx={{ width: 200, height: 200 }}>
-          <PersonIcon style={{ fontSize: "140px" }} />
-        </Avatar>
-      )}
+      <SwitchProfileImage />
       <div>
         <input
           type="file"

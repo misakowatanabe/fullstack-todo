@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectUserAuthData } from "../context/slices/UserAuthDataSlice";
 import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
 import { selectTodoData } from "../context/slices/TodoDataSlice";
+import { selectProfileImageData } from "../context/slices/ProfileImageDataSlice";
 import LoadingDashboard from "../loading/LoadingDashboard";
 import LoadingProfile from "../loading/LoadingAccount";
 import LoadingCreateUpdate from "../loading/LoadingCreateUpdate";
@@ -12,7 +13,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const userAuthData = useSelector(selectUserAuthData);
   const isLoadingData = useSelector(selectIsLoadingData);
   const todoData = useSelector(selectTodoData);
-  const [title, setTitle] = useState("");
+  const profileImageData = useSelector(selectProfileImageData);
+  const [title, setTitle] = useState(null);
 
   useEffect(() => {
     const getName = () => {
@@ -39,7 +41,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         isLoadingData ||
-        (userAuthData && title === "") ? (
+        (userAuthData && title === null) ||
+        (userAuthData && profileImageData === null) ? (
           currentPath
         ) : userAuthData ? (
           <Component {...props} />

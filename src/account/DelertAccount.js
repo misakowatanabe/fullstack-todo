@@ -2,9 +2,6 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
 import { getStorage, ref, deleteObject } from "firebase/storage";
-import { updateTodoData } from "../context/slices/TodoDataSlice";
-import { updateProfileData } from "../context/slices/ProfileDataSlice";
-import { updateProfileImageData } from "../context/slices/ProfileImageDataSlice";
 import { updateSnackbar } from "../context/slices/SnackbarSlice";
 import Button from "@mui/material/Button";
 import { ENDPOINT } from "../config";
@@ -93,8 +90,6 @@ export default function DeleteAccount() {
       );
     }
 
-    dispatch(updateTodoData([{ title: "", body: "" }]));
-    dispatch(updateProfileData([{ name: null, email: null, userUid: null }]));
     signOut(auth)
       .then(() => {
         // Sign-out successful.
