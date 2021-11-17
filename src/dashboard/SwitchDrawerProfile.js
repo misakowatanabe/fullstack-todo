@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectProfileData } from "../context/slices/ProfileDataSlice";
 import { selectProfileImageData } from "../context/slices/ProfileImageDataSlice";
 import { selectIsLoadingData } from "../context/slices/IsLoadingDataSlice";
-import DrawerProfileSkelton from "./DrawerProfileSkelton";
+import DrawerProfileSkeleton from "./DrawerProfileSkeleton";
 import DrawerProfileImage from "./DrawerProfileImage";
 import DrawerProfileName from "./DrawerProfileName";
 
@@ -25,7 +25,7 @@ export default function SwitchDrawerProfile() {
     displayName === null ||
     displayName === undefined
   ) {
-    return <DrawerProfileSkelton />;
+    return <DrawerProfileSkeleton />;
   } else {
     return (
       <div>

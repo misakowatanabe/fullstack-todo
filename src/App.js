@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodoData } from "./context/slices/TodoDataSlice";
+import { updateTodoData, selectTodoData } from "./context/slices/TodoDataSlice";
 import { updateProfileData } from "./context/slices/ProfileDataSlice";
 import { updateUserAuthData } from "./context/slices/UserAuthDataSlice";
 import { updateIsLoadingData } from "./context/slices/IsLoadingDataSlice";
@@ -9,6 +9,7 @@ import {
   updateProfileImageData,
   selectProfileImageData,
 } from "./context/slices/ProfileImageDataSlice";
+import { selectIsLoadingData } from "./context/slices/IsLoadingDataSlice";
 import "./style/App.css";
 import socketIOClient from "socket.io-client";
 import { initializeApp } from "firebase/app";
@@ -35,6 +36,11 @@ export default function App() {
   const auth = getAuth();
   const storage = getStorage();
   const profileImageData = useSelector(selectProfileImageData);
+  const isLoadingData = useSelector(selectIsLoadingData);
+  const todoData = useSelector(selectTodoData);
+  console.log(isLoadingData);
+  console.log(todoData);
+  console.log(todoData[0]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -120,7 +126,7 @@ export default function App() {
       } else {
         // User is signed out
         dispatch(updateUserAuthData(false));
-        dispatch(updateIsLoadingData(false));
+        dispatch(updateIsLoadingData(true));
         dispatch(updateTodoData([{ title: null, body: null }]));
         dispatch(
           updateProfileData([{ name: null, email: null, userUid: null }])

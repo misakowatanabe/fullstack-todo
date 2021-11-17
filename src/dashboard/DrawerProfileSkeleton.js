@@ -2,7 +2,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
-export default function DrawerProfileSkelton() {
+export default function DrawerProfileSkeleton() {
   return (
     <div>
       <ListItem
