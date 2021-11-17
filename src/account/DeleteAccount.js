@@ -12,10 +12,63 @@ export default function DeleteAccount() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     const userUid = auth.currentUser.uid;
 
-    const test = () => {
+    try {
+      const imageRef = ref(storage, `profileImages/${userUid}`);
+      await deleteObject(imageRef).then(() => {
+        // Profile image deleted successfully
+      });
+    } catch (error) {
+      // An error occurred
+      history.push("/error");
+      dispatch(
+        updateSnackbar({
+          value: true,
+          message: "Something went wrong with deleting profile image",
+          severity: "error",
+        })
+      );
+    }
+
+    const deleteCollectionAndAccount = async () => {
+      try {
+        await fetch(`${ENDPOINT}/deleteCollection/${userUid}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        }).then((res) => {
+          res.json().then((res) => {
+            if (res.message === 200) {
+              return;
+            } else if (res.message === 500) {
+              history.push("/error");
+              dispatch(
+                updateSnackbar({
+                  value: true,
+                  message:
+                    "Something went wrong with deleting your todo data: backend",
+                  severity: "error",
+                })
+              );
+            }
+          });
+        });
+      } catch (error) {
+        history.push("/error");
+        dispatch(
+          updateSnackbar({
+            value: true,
+            message:
+              "Something went wrong with deleting your todo data: frontend",
+            severity: "error",
+          })
+        );
+      }
+
       try {
         fetch(`${ENDPOINT}/deleteAccount/${userUid}`, {
           method: "DELETE",
@@ -56,49 +109,13 @@ export default function DeleteAccount() {
           })
         );
       }
-
-      try {
-        fetch(`${ENDPOINT}/deleteCollection/${userUid}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "cors",
-        }).then((res) => {
-          res.json().then((res) => {
-            if (res.message === 200) {
-              return;
-            } else if (res.message === 500) {
-              history.push("/error");
-              dispatch(
-                updateSnackbar({
-                  value: true,
-                  message:
-                    "Something went wrong with deleting your todo data: backend",
-                  severity: "error",
-                })
-              );
-            }
-          });
-        });
-      } catch (error) {
-        history.push("/error");
-        dispatch(
-          updateSnackbar({
-            value: true,
-            message:
-              "Something went wrong with deleting your todo data: frontend",
-            severity: "error",
-          })
-        );
-      }
     };
 
     signOut(auth)
       .then(() => {
         // Sign-out successful.
         console.log("Sign-out successful.");
-        test();
+        deleteCollectionAndAccount();
       })
       .catch((error) => {
         // An error happened.
