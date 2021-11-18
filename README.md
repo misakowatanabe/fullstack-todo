@@ -5,13 +5,12 @@
 - Redux
 - React Router
 - Material UI
+- Socket.IO
 
 ## Backend
 - Node.js
 - Express
 - CORS
-
-## Frontend and backend
 - Socket.IO
 
 ## Database 
