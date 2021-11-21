@@ -43,7 +43,7 @@ export default function CreateTodo() {
       setBodyErrorMessage(errorMessage);
     } else {
       try {
-        fetch(`${ENDPOINT}/push_data_to_db`, {
+        fetch(`${ENDPOINT}/create`, {
           method: "POST",
           body: JSON.stringify(reactData),
           headers: {
