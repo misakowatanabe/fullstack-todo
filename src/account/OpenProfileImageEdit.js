@@ -212,6 +212,7 @@ export default function OpenProfileImageEdit() {
           </label>
           <Button
             variant="contained"
+            color="warning"
             onClick={() => {
               setPreviewImage("");
               setImage(null);
