@@ -1,7 +1,9 @@
 # Full-stack Todo List (Ongoing project)
-<img src="./fullstack-todo-video.gif" alt="fullstack-todo-video" height="500">
+
+<img src="./fullstack-todo-video.gif" alt="fullstack-todo-video" height="auto" maxWidth="800px">
 
 ## Frontend
+
 - React.js (Hooks)
 - Redux
 - React Router
@@ -9,19 +11,23 @@
 - Socket.IO
 
 ## Backend
+
 - Node.js
 - Express
 - CORS
 - Socket.IO
 
-## Database 
+## Database
+
 - Firebase Firestore
-- Firebase Storage 
+- Firebase Storage
 
 ## Authentication
+
 - Firebase Authentication
 
 ## Hosting
+
 - GitHub Pages for frontend
 - Heroku for backend
 
