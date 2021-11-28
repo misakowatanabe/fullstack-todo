@@ -1,4 +1,5 @@
 # Full-stack Todo List (Ongoing project)
+<img src="./fullstack-todo-video.gif" alt="fullstack-todo-video" height="500">
 
 ## Frontend
 - React.js (Hooks)
